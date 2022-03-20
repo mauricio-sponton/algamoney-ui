@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="full-width text-center">
+        <h1>Login</h1>
+    </div>
+
+    <form class="p-fluid formgrid grid" #form="ngForm">
+        <div class="field col-12">
+            <label for="email">Nome</label>
+            <input type="text" id="email" class="inputfield w-full" pInputText required #email="ngModel" name="email" ngModel autofocus>
+            <app-message [control]="email.control" error="required" text="Informe um email."></app-message>
+        </div>
+        <div class="field col-12">
+            <label for="senha">Senha</label>
+            <p-password id="senha" class="inputfield w-full" [toggleMask]="true" required #senha="ngModel" name="senha" ngModel></p-password>
+            <app-message [control]="senha.control" error="required" text="Informe sua senha."></app-message>
+        </div>
+
+        <div class="field col-12">
+            <button pButton type="submit" class="p-button p-button-raised p-button-info" label="Login" [disabled]="form.invalid" (click)="login(email.value, senha.value); senha.reset();"></button>
+        </div>
+    </form>
+</div>

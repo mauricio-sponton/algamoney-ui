@@ -1,0 +1,25 @@
+.container{
+    margin: 0 auto;
+    width: 98%;
+}
+
+.grupo-form{
+    margin-bottom: 1rem;
+}
+.full-width{
+    width: 100%;
+}
+
+.block-label{
+    display: block;
+}
+
+.col-acoes-header{
+    width: 10%;
+}
+  
+.btn-lancamentos{
+    margin-right: .5rem;
+}
+
+ 

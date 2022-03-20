@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="full-width">
+      <h1>Pessoas</h1>
+    </div>
+    <form autocomplete="off" (ngSubmit)="pesquisar()" >
+    <div class="full-width grupo-form">
+      <label>Nome</label>
+      <input type="text" pInputText class="full-width" name="nome" [(ngModel)]="filtro.nome">
+    </div>
+  
+    <div class="full-width">
+      <button pButton type="submit" class="p-button-raised p-button-info" label="Pesquisar"></button>
+    </div>
+  </form>
+    <div class="full-width">
+      <p-table [value]="pessoas" responsiveLayout="stack" [paginator]="true" [rows]="filtro.itensPorPagina" currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros" [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Status</th>
+                <th class="col-acoes-header">Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pessoa>
+            <tr>
+                <td><span class="p-column-title">Nome</span>{{pessoa.nome}}</td>
+                <td><span class="p-column-title">Cidade</span>{{pessoa.endereco.cidade?.nome}}</td>
+                <td><span class="p-column-title">Estado</span>{{pessoa.endereco.cidade?.estado.nome}}</td>
+                <td><span class="p-column-title">Status</span>
+                    <a (click)="mudarStatus(pessoa)" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
+                    tooltipPosition="top">
+                  {{ pessoa.ativo ? 'Ativo' : 'Inativo' }}
+                </a></td>
+                <td class="td-acoes"> <span class="p-column-title acoes">Ações</span>
+                  <a pButton type="button" icon="pi pi-pencil" class="p-button-raised p-button-info btn-pessoas" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/pessoas', pessoa.codigo]"></a>
+                  <a pButton type="button" icon="pi pi-trash" class="p-button-raised p-button-info btn-pessoas" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(pessoa)"></a>
+                </td>
+            </tr>
+        </ng-template>
+        
+    </p-table>
+    </div>
+    <div class="full-width">
+      <button pButton type="button" class="p-button-raised p-button-info" label="Nova Pessoa" routerLink="/pessoas/novo"></button>
+    </div>
+  </div>
+  

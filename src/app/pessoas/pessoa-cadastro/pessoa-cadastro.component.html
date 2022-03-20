@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="full-width">
+        <h1>{{editando ? 'Edição de' : 'Nova'}} Pessoa</h1>
+    </div>
+    <form class="p-fluid formgrid grid" #pessoaForm="ngForm" (ngSubmit)="decisaoForm(pessoaForm)" autocomplete="off">
+        <div class="field col-12">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" class="inputfield w-full" pInputText required #nome="ngModel" name="nome" minlength="5" [(ngModel)]="pessoa.nome">
+
+            <app-message [control]="nome.control" error="required" text="Informe um nome."></app-message>
+            <app-message [control]="nome.control" error="minlength" text="Mínimo de 5 caracteres"></app-message>
+        </div>
+        <div class="field col-12 md:col-9">
+            <label for="logradouro" >Logradouro</label>
+            <input type="text" id="logradouro" class="inputfield w-full" pInputText required name="logradouro" [(ngModel)]="pessoa.endereco.logradouro" #logradouro="ngModel">
+
+            <app-message [control]="logradouro.control" error="required" text="Informe um logradouro."></app-message>
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="numero" >Número</label>
+            <input type="text" id="numero" class="inputfield w-full" pInputText required [(ngModel)]="pessoa.endereco.numero" #numero="ngModel" name="numero">
+
+            <app-message [control]="numero.control" error="required" text="Informe um número."></app-message>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="complemento" >Complemento</label>
+            <input type="text" id="complemento" class="inputfield w-full" pInputText name="complemento" [(ngModel)]="pessoa.endereco.complemento">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="bairro" >Bairro</label>
+            <input type="text" id="bairro" class="inputfield w-full" pInputText required [(ngModel)]="pessoa.endereco.bairro" #bairro="ngModel" name="bairro">
+
+            <app-message [control]="bairro.control" error="required" text="Informe um bairro."></app-message>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="cep" >CEP</label>
+            <p-inputMask type="text" id="cep" class="inputfield w-full" mask="99.999-999" [required]="true" [(ngModel)]="pessoa.endereco.cep" #cep="ngModel" name="cep"></p-inputMask>
+
+            <app-message [control]="cep.control" error="required" text="Informe um CEP."></app-message>
+        </div>
+        
+        <div class="field col-12 md:col-6">
+            <label for="estado" >Estado</label>
+            
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="estados" [(ngModel)]="estadoSelecionado" name="estadoSelecionado" (onChange)="carregarCidades()" #estado="ngModel" [required]="true"></p-dropdown>
+            <app-message [control]="estado.control" error="required" text="Selecione um estado"></app-message>
+        </div>
+
+        <div class="field col-12 md:col-6">
+            <label for="cidade" >Cidade</label>
+            <p-dropdown placeholder="Selecione..."
+              [filter]="true" [options]="cidades" [(ngModel)]="pessoa.endereco.cidade.codigo" name="cidade" #cidade="ngModel" [required]="true" [disabled]="!estadoSelecionado"></p-dropdown>
+              <app-message [control]="cidade.control" error="required" text="Selecione uma cidade"></app-message>
+        </div>
+
+        <div class="col-12">
+            <p-panel header="Contatos">
+              <app-pessoa-cadastro-contato [contatos]="pessoa.contatos" ></app-pessoa-cadastro-contato>
+            </p-panel>
+          </div>
+
+        <div class="flex align-items-center form-controles">
+            <button pButton type="submit" class="p-button p-button-raised p-button-info" label="Salvar" [disabled]="pessoaForm.invalid"></button>
+            <button pButton type="button" class="p-button p-button-raised p-button-help" label="Novo" (click)="novo(pessoaForm)"></button>
+            <a routerLink="/pessoas">Voltar para a pesquisa</a>
+        </div>
+       
+    </form>
+    
+</div>
+
+

@@ -1,0 +1,42 @@
+.container{
+    margin: 0 auto;
+    width: 98%;
+}
+
+.grupo-form{
+    margin-bottom: 1rem;
+}
+.full-width{
+    width: 100%;
+}
+
+.block-label{
+    display: block;
+}
+.ate{
+    margin: 0 .6rem;
+}
+.data{
+    width: 15rem;
+}
+
+.col-valor-header, .col-data-header {
+    width: 6%;
+}
+.col-acoes-header{
+    width: 10%;
+}
+  
+  .col-valor-content {
+    text-align: right;
+  }
+  
+  .col-data-content {
+    text-align: center;
+  }
+
+  .btn-lancamentos{
+      margin-right: .5rem;
+  }
+
+ 

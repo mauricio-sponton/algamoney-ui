@@ -1,0 +1,14 @@
+.container{
+    margin: 0 auto;
+    width: 98%;
+}
+.full-width{
+    width: 100%;
+}
+.form-controles button{
+    margin-right: .6rem;
+    
+}
+.btn-fixo{
+    width: 6rem;
+}
